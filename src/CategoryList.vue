@@ -12,6 +12,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { changeCategory } from 'vuemicro/store'
 export default defineComponent({
   name: 'CategoryList',
   data() {
@@ -29,7 +30,7 @@ export default defineComponent({
   },
   methods: {
     setCategory(category: string): void {
-      
+      changeCategory(category)
     }
   }
 })

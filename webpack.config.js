@@ -13,7 +13,14 @@ module.exports = {
   },
 
   devServer: {
+    contentBase: path.join(__dirname, "public"),
     port: 8081,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers":
+        "X-Requested-With, content-type, Authorization",
+    },
   },
 
   module: {
@@ -42,7 +49,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "vuehost",
       filename: "remoteEntry.js",
-      remotes: {},
+      remotes: {
+        vuemicro: "vuemicro@http://localhost:8080/remoteEntry.js",
+      },
       exposes: {},
       shared: require("./package.json").dependencies,
     }),
